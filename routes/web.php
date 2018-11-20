@@ -28,7 +28,7 @@ Route::prefix('events')->middleware(['auth'])->group(function () {
     //List all events
     Route::get('/', 'EventsController@getList')->name('events.list');
     //Show single event
-    Route::get('{Event}', 'EventsController@getSingle');
+    Route::get('/event/{Event}', 'EventsController@getSingle');
     //List user events
     Route::get('/attended', 'EventsController@getUserList')->name('events.attended');
     //Show single event
