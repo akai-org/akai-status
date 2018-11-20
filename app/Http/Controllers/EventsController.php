@@ -14,6 +14,10 @@ class EventsController extends Controller
         return view('events.list')->withEvents($events);
     }
 
+    public function getSingle(Event $event) {
+        dd($event->users()->get());
+    }
+
     public function getUserList() {
         $events = \Auth::user()->events()->get();
         return view('events.list')->withEvents($events);
