@@ -10,7 +10,7 @@ use App\Event;
 class EventsController extends Controller
 {
     public function getList() {
-        $events = Event::withCount('users');
+        $events = Event::all()->withCount('users');
         return view('events.list')->withEvents($events);
     }
 
