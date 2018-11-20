@@ -13,6 +13,7 @@
                         <td>{{ __('Start time') }}</td>
                         <td>{{ __('Location') }}</td>
                         <td>{{ __('Code') }}</td>
+                        <td>{{ __('Users') }}</td>
                         </thead>
                         @foreach($events as $event)
                             <tr>
@@ -20,6 +21,7 @@
                                 <td>{{ $event->startTime }}</td>
                                 <td>{{ $event->location }}</td>
                                 <td>{{ $event->code }}</td>
+                                <td>{{ $event->users_count }}</td>
                             </tr>
                         @endforeach
                     </table>
