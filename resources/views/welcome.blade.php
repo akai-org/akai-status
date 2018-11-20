@@ -71,8 +71,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('redirect') }}">Login with <b>@akai.org.pl</b></a>
                     @endauth
                 </div>
             @endif
