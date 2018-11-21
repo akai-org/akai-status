@@ -58,15 +58,17 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('events.list') }}">
-                                        {{ __('All events') }}
-                                    </a>
                                     <a class="dropdown-item" href="{{ route('events.attended') }}">
                                         {{ __('My events') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('events.get.add') }}">
-                                        {{ __('Add event') }}
-                                    </a>
+                                    @role('admin')
+                                        <a class="dropdown-item" href="{{ route('events.list') }}">
+                                            {{ __('All events') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('events.get.add') }}">
+                                            {{ __('Add event') }}
+                                        </a>
+                                    @endrole
                                 </div>
 
                             </li>
