@@ -96,6 +96,12 @@
         </nav>
 
         <main class="py-4">
+            @if(session('success'))
+                <h1>{{session('success')}}</h1>
+            @endif
+            @if($errors->any())
+                <h4>{{$errors->first()}}</h4>
+            @endif
             @yield('content')
         </main>
     </div>

@@ -26,7 +26,7 @@ Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::prefix('events')->middleware(['auth'])->group(function () {
     //List all events
-    Route::get('/', 'EventsController@getList')->name('events.list')->middleware(['role:admin']);
+    Route::get('/all', 'EventsController@getList')->name('events.list')->middleware(['role:admin']);
     //Show single event
     Route::get('/event/{event}', 'EventsController@getSingle')->middleware(['role:admin']);
     //List user events

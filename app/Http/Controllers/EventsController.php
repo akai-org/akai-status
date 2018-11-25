@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\Authenticate;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Event;
 
@@ -48,18 +49,33 @@ class EventsController extends Controller
     }
 
     public function postJoin(Request $request) {
+
+        $error = null;
         //TODO: validation
 
         //Check if event exists
         $event = Event::whereCode($request->input('code'))->first();
+        $user = \Auth::user();
 
-        if($event->exists()) {
-            //Add user to event
-            $user = \Auth::user();
-            $user->events()->attach($event);
-            return redirect()->route('events.list');
+        if( is_null($event) || ! $event->exists() ) {
+            $error = __('No event for the code found');
+        } else if ($user->events()->where('event_id', $event->id)->exists()) {
+            //Check if already joined
+            $error = __('Already joined event');
+        } else if (Carbon::now()->between(
+            Carbon::parse($event->startTime)->subMinutes(20),
+            Carbon::parse($event->startTime)->addMinutes($event->duration + 10)
+        )){
+            //Check if event is happening now
+            $error = __('Event has not yet started, or has ended');
+        }
+
+        if( ! is_null($error) ) {
+            return redirect()->back()->withErrors([$error]);
         } else {
-            return redirect()->back();
+            //Add user to event
+            $user->events()->attach($event);
+            return redirect()->route('events.attended')->withMessage('Event joined');
         }
 
     }
