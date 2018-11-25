@@ -69,7 +69,7 @@ class EventsController extends Controller
 //        )){
             //Check if event is happening now
 //            dd(Carbon::parse(Carbon::parse($event->startTime)->addMinutes($event->duration + 10)));
-            $error = __('Event has not yet started, or has ended');
+//            $error = __('Event has not yet started, or has ended');
 //        }
 
         if( ! is_null($error) ) {
