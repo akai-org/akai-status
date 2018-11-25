@@ -62,14 +62,15 @@ class EventsController extends Controller
         } else if ($user->events()->where('event_id', $event->id)->exists()) {
             //Check if already joined
             $error = __('Already joined event');
-        } else if (Carbon::now()->between(
-            Carbon::parse($event->startTime)->subMinutes(20),
-            Carbon::parse($event->startTime)->addMinutes($event->duration + 10)
-        )){
+        }
+//        else if (Carbon::now()->between(
+//            Carbon::parse($event->startTime)->subMinutes(20),
+//            Carbon::parse($event->startTime)->addMinutes($event->duration + 10)
+//        )){
             //Check if event is happening now
 //            dd(Carbon::parse(Carbon::parse($event->startTime)->addMinutes($event->duration + 10)));
             $error = __('Event has not yet started, or has ended');
-        }
+//        }
 
         if( ! is_null($error) ) {
             return redirect()->back()->withErrors([$error]);
