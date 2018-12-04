@@ -7,6 +7,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Event;
+use Faker\Factory;
 
 class EventsController extends Controller
 {
@@ -30,13 +31,13 @@ class EventsController extends Controller
 
     public function postAdd(Request $request) {
         //TODO: validate input
-
+        $faker = Factory::create();
         $event = new Event();
         $event->name = $request->input('name');
         $event->location = $request->input('location');
         $event->startTime = $request->input('startTime');
         $event->duration = $request->input('duration');
-        $event->code = str_random(8);
+        $event->code = $faker->word;
         $event->isPrivate = $request->has('isPrivate');
 
         $event->save();
